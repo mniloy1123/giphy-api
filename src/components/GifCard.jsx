@@ -8,7 +8,7 @@ const GifCard = () => {
   }, []);
 
   async function requestTrendingGifs() {
-    const apiKey = process.env.REACT_APP_GIPHY_API_KEY; //
+    const apiKey = process.env.REACT_APP_GIPHY_API_KEY;
     const res = await fetch(
       `https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}`
     );
@@ -19,12 +19,13 @@ const GifCard = () => {
 
   return (
     <div>
-      {/*<button onClick={requestTrendingGifs}>Get Trending Gifs</button> */}
-      <div>
-        {gifs.map((gif) => (
-          <img key={gif.id} src={gif.images.fixed_height.url} alt="GIF" />
-        ))}
-      </div>
+      {gifs.map((gif) => (
+        <img
+          key={`gif-card-${gif.id}`}
+          src={gif.images.fixed_height.url}
+          alt="GIF"
+        />
+      ))}
     </div>
   );
 };
