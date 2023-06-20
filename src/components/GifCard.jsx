@@ -20,10 +20,12 @@ const GifCard = () => {
     setGifs(removeDuplicates(gifData));
   }
 
-  const handleSearch = async (searchTerm) => {
+  const handleSearch = async (searchTerm, rating, language) => {
     const apiKey = process.env.REACT_APP_GIPHY_API_KEY;
+    const ratingQuery = rating ? `&rating=${rating}` : "";
+    const languageQuery = language ? `&lang=${language}` : "";
     const res = await fetch(
-      `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchTerm}`
+      `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchTerm}${ratingQuery}${languageQuery}`
     );
     const data = await res.json();
     const gifData = data.data;
