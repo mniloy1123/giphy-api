@@ -1,20 +1,14 @@
 import { useState } from "react";
+import PropTypes from "prop-types"; //for eslint validation
 
-function SearchField() {
-  const [search, setSearch] = useState([]);
+const SearchField = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  async function requestSearchGifs() {
-    const apiKey = process.env.REACT_APP_GIPHY_API_KEY;
-    const res = await fetch(
-      `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchTerm}`
-    );
-    const data = await res.json();
-    const gifData = data.data;
-    setSearch(gifData);
-  }
-  const handleInputChange = (e) => {
-    setSearchTerm(e.target.value);
+  const handleSearch = () => {
+    const trimmedSearchTerm = searchTerm.trim();
+    if (trimmedSearchTerm) {
+      onSearch(trimmedSearchTerm);
+    }
   };
 
   return (
@@ -24,22 +18,17 @@ function SearchField() {
         type="text"
         placeholder="Search Gifs"
         value={searchTerm}
-        onChange={handleInputChange}
+        onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <button className="searchButton" onClick={requestSearchGifs}>
+      <button className="searchButton" onClick={handleSearch}>
         Search
       </button>
-      <div>
-        {search.map((gif) => (
-          <img
-            key={`search-field-${gif.id}`}
-            src={gif.images.fixed_height.url}
-            alt="GIF"
-          />
-        ))}
-      </div>
     </div>
   );
-}
+};
+//ensuring that the onSearch prop is a function
+SearchField.propTypes = {
+  onSearch: PropTypes.func.isRequired,
+};
 
 export default SearchField;
