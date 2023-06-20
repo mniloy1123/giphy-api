@@ -12,7 +12,7 @@ Install the dependencies:
 `npm install`
 
 To use:
-Make a .env file with your own an api key
+Make a .env file with your own api key
 
 Run: 
 `npm run dev`
