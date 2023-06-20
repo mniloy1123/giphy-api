@@ -1,8 +1,13 @@
 import { useState } from "react";
 import PropTypes from "prop-types"; //for eslint validation
+import HomeIcon from "@mui/icons-material/Home";
 
 const SearchField = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
+
+  const handleHomeClick = () => {
+    window.location.reload(); // Reload the page
+  };
 
   const handleSearch = () => {
     const trimmedSearchTerm = searchTerm.trim();
@@ -12,7 +17,13 @@ const SearchField = ({ onSearch }) => {
   };
 
   return (
-    <div>
+    <div className="container">
+      <HomeIcon
+        color="secondary"
+        fontSize="large"
+        onClick={handleHomeClick}
+        style={{ cursor: "pointer" }}
+      />
       <input
         className="searchBar"
         type="text"
