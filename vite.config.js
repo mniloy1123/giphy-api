@@ -7,7 +7,6 @@ dotenv.config();
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/giphy-api",
   plugins: [react(), VitePluginNode()],
   define: {
     "process.env": process.env,
